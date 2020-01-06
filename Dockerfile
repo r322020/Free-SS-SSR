@@ -1,5 +1,5 @@
 FROM alpine
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && apk add --no-cache nodejs npm privoxy
+RUN apk add --no-cache nodejs npm privoxy
 RUN wget -O - https://github.com/shadowsocks/shadowsocks-rust/releases/download/v1.8.1/shadowsocks-v1.8.1-stable.x86_64-unknown-linux-musl.tar.xz | tar -xJv -C /usr/local/bin sslocal
 RUN echo '104.31.74.55 youneed.win' >> /etc/hosts && echo '104.31.74.55 www.youneed.win' >> /etc/hosts
 RUN cd /usr/local/bin && npm i cloudscraper@4 jsdom@15 request@2 && \
