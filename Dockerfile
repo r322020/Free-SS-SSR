@@ -3,7 +3,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 RUN wget -O - https://github.com/shadowsocks/shadowsocks-rust/releases/download/v1.8.1/shadowsocks-v1.8.1-stable.x86_64-unknown-linux-musl.tar.xz | tar -xJv -C /usr/local/bin sslocal
 RUN echo '104.31.74.55 youneed.win' >> /etc/hosts && echo '104.31.74.55 www.youneed.win' >> /etc/hosts
 RUN cd /usr/local/bin && npm i cloudscraper@4 jsdom@15 request@2 && \
-  echo -e "#!/usr/bin/env node\nrequire('cloudscraper').get('https://www.youneed.win/free-ss').then((x)=>{let document=new (require('jsdom').JSDOM)(x).window.document;console.log(JSON.stringify({local_address:'0.0.0.0',local_port:1080,servers:Array.from(document.querySelectorAll('#post-box > div > section > table > tbody > tr')).map((x)=>Array.from(x.children).map((x)=>x.innerHTML)).map((x)=>({address:x[0],port:Number(x[1]),password:x[2],method:x[3],country:x[5]})).filter((x)=>x.method!=='aes-128-ctr')}));},console.error)" > /usr/local/bin/genss && \
+  echo -e "#!/usr/bin/env node\nrequire('cloudscraper').get('https://www.youneed.win/free-ss').then((x)=>{let document=new (require('jsdom').JSDOM)(x).window.document;console.log(JSON.stringify({local_address:'0.0.0.0',local_port:1080,servers:Array.from(document.querySelectorAll('#post-box > div > section > table > tbody > tr')).map((x)=>Array.from(x.children).map((x)=>x.innerHTML)).map((x)=>({address:x[0],port:Number(x[1]),password:x[2],method:x[3],country:x[5]})).filter((x)=>true)}));},console.error)" > /usr/local/bin/genss && \
   chmod +x /usr/local/bin/genss
 RUN echo -e "\
 user-manual /usr/share/doc/privoxy/user-manual/\n\
